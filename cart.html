@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panier - AZUL snack</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Assurez-vous que ce chemin est correct -->
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav role="navigation" aria-label="Menu principal">
+            <!-- Conteneur principal pour le logo et les boutons -->
+            <div class="header-container">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <a href="azul.html" aria-label="Retour à l'accueil">
+                        <img src="assets/azul_logo.png" alt="Logo de AZUL snack" class="logo">
+                    </a>
+                </div>
+                <!-- Menu de Navigation -->
+                <ul class="nav-links">
+                <li><a href="azul.html"><i class="fas fa-home" aria-hidden="true"></i> Accueil</a></li>
+                <li><a href="login.php"><i class="fas fa-globe" aria-hidden="true"></i> Connexion</a></li>
+                    <li><a href="profile.php"><i class="fas fa-user-circle" aria-hidden="true"></i> Mon Profil</a></li>
+                    <li><a href="contact.html"><i class="fas fa-phone" aria-hidden="true"></i> Contact</a></li>
+                    <li>
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i> 
+                            Panier (<span id="cart-counter">0</span>)
+                        </a>
+                    </li>
+                </ul>    
+            </div>
+        </nav>
+    </header>
+
+    <!-- Section Panier -->
+    <main>
+        <section class="cart-section">
+            <h1>Votre Panier</h1>
+            <div id="cart-items" class="cart-items">
+                <!-- Articles du panier (ajoutés dynamiquement via JavaScript) -->
+            </div>
+
+            <!-- Récapitulatif -->
+            <aside class="order-summary">
+                <h2>Récapitulatif</h2>
+                <div class="summary-item">
+                    <span>Sous-total :</span>
+                    <span id="subtotal">0€</span>
+                </div>
+                <div class="summary-item">
+                    <span>Frais de livraison :</span>
+                    <span id="fees">3€</span>
+                </div>
+                <div class="summary-item">
+                    <span>Total :</span>
+                    <span id="total">3€</span>
+                </div>
+                <button class="checkout-button" onclick="proceedToCheckout()">Payer Maintenant</button>
+            </aside>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <!-- Section Informations -->
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul class="footer-links">
+                    <li><a href="cgv.html" aria-label="Conditions Générales de Vente">CGV</a></li>
+                    <li><a href="mentions-legales.html" aria-label="Mentions Légales">Mentions Légales</a></li>
+                    <li><a href="contact.html" aria-label="Contactez-nous">Contact</a></li>
+                </ul>
+            </div>
+    
+            <!-- Section Paiements Acceptés -->
+            <div class="footer-section">
+                <h3>Paiement 100% sécurisé</h3>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-google-pay"></i>
+                    <i class="fab fa-apple-pay"></i>
+                </div>    
+            </div>
+    
+            <!-- Section Messages Officiels -->
+            <div class="footer-section">
+                <h3>Mentions Importantes</h3>
+                <p class="important-message">
+                <p class="health-tip">
+                    Pour votre santé, mangez au moins <strong>5 fruits et légumes par jour</strong>. Plus d'infos sur <a href="https://www.mangerbouger.fr" target="_blank" rel="noopener noreferrer">mangerbouger.fr</a>.
+                </p>
+            </div>
+    
+            <!-- Section Réseaux Sociaux -->
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+
+                <div class="footer-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28934.40579508444!2d7.259717837500001!3d43.702823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cdd01b5f73ec5b%3A0x46f64ae3c4f275f3!2sNice!5e0!3m2!1sen!2sfr!4v1698745600000!5m2!1sen!2sfr" 
+                        width="100%" 
+                        height="100" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="footer-copyright">
+            <p>&copy; 2025 AZUL Snack. Tous droits réservés.</p>
+        </div>
+
+        <div class="footer-banner">
+            <img src="assets/alcohol-banner-legal.webp" alt="Bannière Footer" loading="lazy">
+        </div> 
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js" defer></script> <!-- Assurez-vous que ce chemin est correct -->
+</body>
+</html>

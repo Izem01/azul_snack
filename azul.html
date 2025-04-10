@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AZUL Snack - Boissons, Biscuits, Chips | Livraison à Nice</title>
+    <meta name="keywords" content="snacks, boissons, chocolats, chips, biscuits, livraison Nice">
+    <meta name="author" content="AZUL Snack">
+    <meta name="description" content="Commandez vos snacks préférés chez AZUL Snack : boissons, chocolats, chips, biscuits. Livraison rapide dans toute la ville de Nice !">
+    <meta property="og:title" content="AZUL Snack - Votre Boutique en Ligne">
+    <meta property="og:description" content="Commandez vos snacks préférés chez AZUL Snack : boissons, chocolats, chips, biscuits. Livraison rapide dans toute la ville de Nice !">
+    <meta property="og:image" content="https://www.azulsnack.com/assets/azul_logo.png">
+    <meta property="og:url" content="https://www.azulsnack.com/azul.html">
+    <link rel="canonical" href="https://www.azulsnack.com/azul.html">
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="styles.css">    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
+    <!-- GSAP pour les animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <!-- ScrollReveal pour les animations de défilement -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader" aria-hidden="true">
+        <span role="progressbar" aria-label="Chargement en cours"></span>
+    </div>
+    <!-- Header -->
+    <header role="banner">
+        <nav role="navigation" aria-label="Menu principal">
+            <!-- Conteneur principal pour le logo et les boutons -->
+            <div class="header-container">
+                <!-- Logo -->
+                <div class="logo-container">
+                    <a href="azul.html" aria-label="Retour à l'accueil">
+                        <img src="assets/azul_logo.png" alt="Logo de AZUL snack" class="logo">
+                    </a>
+                </div>
+
+                <ul class="nav-links">
+                    <li><a href="azul.html"><i class="fas fa-home" aria-hidden="true"></i> Accueil</a></li>
+                
+                    <!-- Bouton Connexion (visible uniquement si non connecté) -->
+                    <li id="login-button">
+                        <a href="login.php"><i class="fas fa-globe" aria-hidden="true"></i> Connexion</a>
+                    </li>
+                
+                    <!-- Lien Mon Profil (visible uniquement si connecté) -->
+                    <li id="profile-button" style="display: none;">
+                        <a href="profile.php">
+                            <i class="fas fa-user-circle" aria-hidden="true"></i> 
+                            <span id="profile-name">Mon Profil</span>
+                        </a>
+                        <button onclick="logout()" style="margin-left: 10px;">Déconnexion</button>
+                    </li>
+                
+                    <li><a href="contact.html"><i class="fas fa-phone" aria-hidden="true"></i> Contact</a></li>
+                    <li>
+                        <a href="cart.html">
+                            <i class="fas fa-shopping-cart" aria-hidden="true"></i> 
+                            Panier (<span id="cart-counter">0</span>)
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Main Content -->
+    <main role="main">
+        <!-- Hero Section -->
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">Bienvenue sur AZUL Snack</h1>
+            <p>Découvrez nos boissons, chocolats, chips, biscuits et bien plus encore ! Livraison dans toute Nice</p>
+            <!-- Barre de Recherche Centrée -->
+            <div class="search-bar-centered" role="search">
+                <input type="text" id="search-input" placeholder="Rechercher un produit..."
+                    oninput="filterProductsBySearch()" aria-label="Rechercher un produit">
+                <button onclick="searchProducts()" aria-label="Lancer la recherche">Rechercher</button>
+            </div>
+        </section>
+
+        <!-- Filtres de Catégories -->
+        <section class="filters category-buttons" aria-labelledby="category-filters">
+            <h2 id="category-filters" class="sr-only">Filtrer par catégorie</h2>
+            <button data-category="all" onclick="applyFilters()" aria-label="Afficher tous les produits">Tous</button>
+            <button data-category="boissons" onclick="applyFilters()" aria-label="Afficher les boissons">Boissons</button>
+            <button data-category="chocolats" onclick="applyFilters()" aria-label="Afficher les chocolats">Chocolats</button>
+            <button data-category="chips" onclick="applyFilters()" aria-label="Afficher les chips">Chips</button>
+            <button data-category="biscuits" onclick="applyFilters()" aria-label="Afficher les biscuits">Biscuits</button>
+            <button data-category="fruits secs" onclick="applyFilters()" aria-label="Afficher les salés">Fruits secs</button>
+        </section>
+
+        <!-- Products Section -->
+        <section class="products" aria-labelledby="product-list">
+            <div class="product-grid" id="product-grid">
+                <!-- Product 1 -->
+                <article class="product-card" data-id="1" data-category="boissons" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="1" onclick="toggleFavorite(1)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/pepsi.webp" alt="Pepsi" loading="lazy">
+                    <h3 itemprop="name">Pepsi</h3>
+                    <p itemprop="price" content="2">2€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(1, 'Pepsi', 2)" aria-label="Ajouter Pepsi au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 2 -->
+                <article class="product-card" data-id="2" data-category="chocolats" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="2" onclick="toggleFavorite(2)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/milka.webp" alt="Milka" loading="lazy">
+                    <h3 itemprop="name">Milka</h3>
+                    <p itemprop="price" content="3">3€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(2, 'Milka', 3)" aria-label="Ajouter Milka au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 3 -->
+                <article class="product-card" data-id="3" data-category="chips" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="3" onclick="toggleFavorite(3)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/lays.webp" alt="Lays" loading="lazy">
+                    <h3 itemprop="name">Lays</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(3, 'Lays', 2.50)" aria-label="Ajouter Lays au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 4 -->
+                <article class="product-card" data-id="4" data-category="biscuits" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="4" onclick="toggleFavorite(4)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/mikado.webp" alt="Mikado" loading="lazy">
+                    <h3 itemprop="name">Mikado</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(4, 'Mikado', 2.50)" aria-label="Ajouter Mikado au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 5 -->
+                <article class="product-card" data-id="5" data-category="chips" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="5" onclick="toggleFavorite(5)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/pringles.webp" alt="Pringles Original" loading="lazy">
+                    <h3 itemprop="name">Pringles Original</h3>
+                    <p itemprop="price" content="2.8">2.80€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(5, 'Pringles Original', 2.8)"
+                        aria-label="Ajouter Pringles Original au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 6 -->
+                <article class="product-card" data-id="6" data-category="chips" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="6" onclick="toggleFavorite(6)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/pringlescream2.webp" alt="Pringles Creamy Onion" loading="lazy">
+                    <h3 itemprop="name">Pringles Creamy Onion</h3>
+                    <p itemprop="price" content="2.8">2.85€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(6, 'Pringles Creamy Onion', 2.85)"
+                        aria-label="Ajouter Pringles Creamy Onion au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 7 -->
+                <article class="product-card" data-id="7" data-category="chips" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="7" onclick="toggleFavorite(7)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/pringlesbar3.webp" alt="Pringles Barbecue" loading="lazy">
+                    <h3 itemprop="name">Pringles Barbecue</h3>
+                    <p itemprop="price" content="2.8">2.80€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(7, 'Pringles Barbecue', 2.8)"
+                        aria-label="Ajouter Pringles Barbecue au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 8 -->
+                <article class="product-card" data-id="8" data-category="chocolats" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="8" onclick="toggleFavorite(8)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/kinder2.webp" alt="Kinder" loading="lazy">
+                    <h3 itemprop="name">Kinder</h3>
+                    <p itemprop="price" content="1.00">1.00€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(8, 'Kinder', 1.00)" aria-label="Ajouter Kinder au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 9 -->
+                <article class="product-card" data-id="9" data-category="biscuits" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="9" onclick="toggleFavorite(9)" aria-label="Ajouter aux favoris">
+                        ♡</div>
+                    <img src="assets/kinderb.webp" alt="Kinder Bueno" loading="lazy">
+                    <h3 itemprop="name">Kinder Bueno</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(9, 'Kinder Bueno', 2.50)"
+                        aria-label="Ajouter Kinder Bueno au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 10 -->
+                <article class="product-card" data-id="10" data-category="biscuits" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="10" onclick="toggleFavorite(10)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/kinderbw.webp" alt="Kinder Bueno White" loading="lazy">
+                    <h3 itemprop="name">Kinder Bueno White</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(10, 'Kinder Bueno White', 2.50)"
+                        aria-label="Ajouter Kinder Bueno White au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 11 -->
+                <article class="product-card" data-id="11" data-category="boissons" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="11" onclick="toggleFavorite(11)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/coca.webp" alt="Coca-Cola" loading="lazy">
+                    <h3 itemprop="name">Coca-Cola</h3>
+                    <p itemprop="price" content="2.00">2.00€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(11, 'Coca-Cola', 2.00)" aria-label="Ajouter Coca-Cola au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 12 -->
+                <article class="product-card" data-id="12" data-category="biscuits" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="12" onclick="toggleFavorite(12)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/oreo.webp" alt="Oreo" loading="lazy">
+                    <h3 itemprop="name">Oreo</h3>
+                    <p itemprop="price" content="1.80">1.80€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(12, 'Oreo', 1.80)" aria-label="Ajouter Oreo au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 13 -->
+                <article class="product-card" data-id="13" data-category="boissons" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="13" onclick="toggleFavorite(13)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/monster.webp" alt="Monster Original" loading="lazy">
+                    <h3 itemprop="name">Monster Original</h3>
+                    <p itemprop="price" content="2.80">2.80€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(13, 'Monster Original', 2.80)"
+                        aria-label="Ajouter Monster Original au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 14 -->
+                <article class="product-card" data-id="14" data-category="boissons" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="14" onclick="toggleFavorite(14)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/monsterloco3.webp" alt="Monster Mango Loco" loading="lazy">
+                    <h3 itemprop="name">Monster Mango Loco</h3>
+                    <p itemprop="price" content="2.90">2.90€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(14, 'Monster Mango Loco', 2.90)"
+                        aria-label="Ajouter Monster Mango Loco au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 15 -->
+                <article class="product-card" data-id="15" data-category="boissons" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="15" onclick="toggleFavorite(15)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/monsterzer2.webp" alt="Monster Zero" loading="lazy">
+                    <h3 itemprop="name">Monster Zero</h3>
+                    <p itemprop="price" content="2.80">2.80€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(15, 'Monster Zero', 2.80)"
+                        aria-label="Ajouter Monster Zero au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 16 -->
+                <article class="product-card" data-id="16" data-category="chocolats" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="16" onclick="toggleFavorite(16)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/milkanoise2.webp" alt="Milka Noisette" loading="lazy">
+                    <h3 itemprop="name">Milka Noisette</h3>
+                    <p itemprop="price" content="1.50">1.50€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(16, 'Milka Noisette', 1.50)"
+                        aria-label="Ajouter Milka Noisette au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 17 -->
+                <article class="product-card" data-id="17" data-category="boissons" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="17" onclick="toggleFavorite(17)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/orangina.webp" alt="Orangina" loading="lazy">
+                    <h3 itemprop="name">Orangina</h3>
+                    <p itemprop="price" content="2.00">2.00€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(17, 'Orangina', 2.00)" aria-label="Ajouter Orangina au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                <!-- Product 18 -->
+                <article class="product-card" data-id="18" data-category="fruits secs" itemscope
+                    itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="18" onclick="toggleFavorite(18)"
+                        aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/amandes.webp" alt="Amandes" loading="lazy">
+                    <h3 itemprop="name">Amandes</h3>
+                    <p itemprop="price" content="2.80">2.80€</p>
+                    <div class="add-to-cart-icon" onclick="addToCart(18, 'Amandes', 2.80)" aria-label="Ajouter Amandes au panier">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+
+                <!-- Product 19 -->
+                <article class="product-card" data-id="19" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="19" onclick="toggleFavorite(19)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/oasis.webp" alt="Oasis Tropical" loading="lazy">
+                    <h3 itemprop="name">Oasis Tropical</h3>
+                    <p itemprop="price" content="2.00">2.00€</p>
+                    <button onclick="addToCart(19, 'Oasis Tropical', 2.00)" aria-label="Ajouter Oasis Tropical au panier">    
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 20 -->
+                <article class="product-card" data-id="20" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="20" onclick="toggleFavorite(20)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/oasis2.webp" alt="Oasis Pomme Cassis" loading="lazy">
+                    <h3 itemprop="name">Oasis Pomme Cassis</h3>
+                    <p itemprop="price" content="2.00">2.00€</p>
+                    <button onclick="addToCart(20, 'Oasis Pomme Cassis', 2.00)" aria-label="Ajouter Oasis Pomme Cassis au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 21 -->
+                <article class="product-card" data-id="21" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="21" onclick="toggleFavorite(21)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Kronenbourg-1664-blanc.webp" alt="Kronenbourg-1664-blanc" loading="lazy">
+                    <h3 itemprop="name">Kronenbourg 1664 blanc</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <button onclick="addToCart(21, 'Kronenbourg 1664 blanc', 2.50)" aria-label="Ajouter Kronenbourg-1664-blanc au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 22 -->
+                <article class="product-card" data-id="22" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="22" onclick="toggleFavorite(22)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/heinken.webp" alt="heinken" loading="lazy">
+                    <h3 itemprop="name">Heinken</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <button onclick="addToCart(22, 'heinken', 2.50)" aria-label="Ajouter heinken au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 23 -->
+                <article class="product-card" data-id="23" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="23" onclick="toggleFavorite(23)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/jd.webp" alt="jd" loading="lazy">
+                    <h3 itemprop="name">Jack & Daniel 700 ml</h3>
+                    <p itemprop="price" content="24">24€</p>
+                    <button onclick="addToCart(23, 'Jack & Daniel 700 ml', 24)" aria-label="Ajouter Jack & Daniel au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 24 -->
+                <article class="product-card" data-id="24" data-category="fruits secs" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="24" onclick="toggleFavorite(24)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/cacahuete.webp" alt="cacahuete" loading="lazy">
+                    <h3 itemprop="name">Cacahuetes non salées</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(24, 'cacahuete', 1.99)" aria-label="Ajouter cacahuete au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 25 -->
+                <article class="product-card" data-id="25" data-category="fruits secs" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="25" onclick="toggleFavorite(20)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/cacahuete2.webp" alt="cacahuete2" loading="lazy">
+                    <h3 itemprop="name">Cacahuetes salées 220g</h3>
+                    <p itemprop="price" content="1.80">1.80€</p>
+                    <button onclick="addToCart(25, 'cacahuetes salées', 1.80)" aria-label="Ajoutercacahuetes salées  au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 26 -->
+                <article class="product-card" data-id="26" data-category="chips" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="26" onclick="toggleFavorite(26)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/doritosNC.webp" alt="doritosNC" loading="lazy">
+                    <h3 itemprop="name">Doritos Nacho Cheese</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <button onclick="addToCart(26, 'Doritos Nacho Cheese', 2.50)" aria-label="Ajouter Doritos Nacho Cheese au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 27 -->
+                <article class="product-card" data-id="27" data-category="chips" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="27" onclick="toggleFavorite(27)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/doritosSCP.webp" alt="doritosSCP" loading="lazy">
+                    <h3 itemprop="name">Doritos Sweet Chilli Pepper</h3>
+                    <p itemprop="price" content="2.50">2.50€</p>
+                    <button onclick="addToCart(27, 'Doritos Sweet Chilli Pepper', 2.50)" aria-label="Ajouter Doritos Sweet Chilli Pepper au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 28 -->
+                <article class="product-card" data-id="28" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="28" onclick="toggleFavorite(28)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/lupecolier.webp" alt="lupecolier" loading="lazy">
+                    <h3 itemprop="name"> Petit écolier</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(28, 'petit écolier', 1.99)" aria-label="Ajouter petit écolier au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 29 -->
+                <article class="product-card" data-id="29" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="29" onclick="toggleFavorite(29)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Stercaramel.webp" alt="Stercaramel" loading="lazy">
+                    <h3 itemprop="name">Moelleux coeur caramel</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(29, 'Moelleux coeur caramel', 1.99)" aria-label="Ajouter Moelleux coeur caramel au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+
+                <!-- Product 30 -->
+                <article class="product-card" data-id="30" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="30" onclick="toggleFavorite(30)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/cristaline.webp" alt="cristaline" loading="lazy">
+                    <h3 itemprop="name">Cristaline</h3>
+                    <p itemprop="price" content="1.10">1.10€</p>
+                    <button onclick="addToCart(30, 'cristaline', 1.10)" aria-label="Ajouter cristaline au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+
+                <!-- Product 31 -->
+                <article class="product-card" data-id="31" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="31" onclick="toggleFavorite(31)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/nutella_biscuits.webp" alt="Oasis Pomme Cassis" loading="lazy">
+                    <h3 itemprop="name">Nutella Biscuit</h3>
+                    <p itemprop="price" content="2.99">2.99€</p>
+                    <button onclick="addToCart(31, 'Nutella Biscuit', 1.99)" aria-label="Ajouter Nutella Biscuit au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 32 -->
+                <article class="product-card" data-id="32" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="32" onclick="toggleFavorite(32)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/nutellab_ready.webp" alt="nutellab_ready" loading="lazy">
+                    <h3 itemprop="name">Nutella b_ready</h3>
+                    <p itemprop="price" content="2.99">2.99€</p>
+                    <button onclick="addToCart(32, 'nutella b_ready', 2.99)" aria-label="Ajouter nutella b_ready au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 33 -->
+                <article class="product-card" data-id="33" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="33" onclick="toggleFavorite(33)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/madeleinelabonnemaman.webp" alt="madeleinelabonnemaman" loading="lazy">
+                    <h3 itemprop="name">Madeleine</h3>
+                    <p itemprop="price" content="2.99">2.99€</p>
+                    <button onclick="addToCart(33, 'madeleine', 2.99)" aria-label="Ajouter madeleine au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 34 -->
+                <article class="product-card" data-id="34" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="34" onclick="toggleFavorite(34)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/rb1.webp" alt="redbull" loading="lazy">
+                    <h3 itemprop="name">RedBull</h3>
+                    <p itemprop="price" content="2.60">2.60€</p>
+                    <button onclick="addToCart(34, 'RedBull', 2.60)" aria-label="Ajouter RedBull au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 35 -->
+                <article class="product-card" data-id="35" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="35" onclick="toggleFavorite(35)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/rbzer2.webp" alt="RedBull zero" loading="lazy">
+                    <h3 itemprop="name">RedBull zero</h3>
+                    <p itemprop="price" content="2.60">2.60€</p>
+                    <button onclick="addToCart(35, 'RedBull zero', 2.60)" aria-label="Ajouter RedBull zero au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 36 -->
+                <article class="product-card" data-id="36" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="36" onclick="toggleFavorite(36)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/schwepps.webp" alt="schwepps" loading="lazy">
+                    <h3 itemprop="name">Schwepps</h3>
+                    <p itemprop="price" content="1.99">2.00€</p>
+                    <button onclick="addToCart(36, 'schwepps', 1.99)" aria-label="Ajouter schwepps au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 37 -->
+                <article class="product-card" data-id="37" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="37" onclick="toggleFavorite(37)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/pimsorange.webp" alt="Oasis Pomme Cassis" loading="lazy">
+                    <h3 itemprop="name">Pims orange</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(37, 'pimsorange', 1.99)" aria-label="Ajouter pimsorange au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 38 -->
+                <article class="product-card" data-id="38" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="38" onclick="toggleFavorite(38)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/pimframb.webp" alt="pimframb" loading="lazy">
+                    <h3 itemprop="name">Pims framboise</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(38, 'pimsframboise', 1.99)" aria-label="Ajouter pims framboise au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 39 -->
+                <article class="product-card" data-id="39" data-category="chocolats" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="39" onclick="toggleFavorite(39)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Kit_kat.webp" alt=" Kit kat" loading="lazy">
+                    <h3 itemprop="name">Kit Kat</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(39, 'Kit Kat', 1.99)" aria-label="Ajouter Kit Kat au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 40 -->
+                <article class="product-card" data-id="40" data-category="chocolats" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="40" onclick="toggleFavorite(40)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/moltesers.webp" alt="" loading="lazy">
+                    <h3 itemprop="name">Moltesers</h3>
+                    <p itemprop="price" content="1.99">2.99€</p>
+                    <button onclick="addToCart(40, 'Moltesers', 2.99)" aria-label="Ajouter Moltesers au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 41 -->
+                <article class="product-card" data-id="41" data-category="chocolats" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="41" onclick="toggleFavorite(41)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/snickers-bar.webp" alt="snickers-bar" loading="lazy">
+                    <h3 itemprop="name">Snickers</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(41, 'Snickers', 1.99)" aria-label="Ajouter Snickers au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 42 -->
+                <article class="product-card" data-id="42" data-category="chocolats" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="42" onclick="toggleFavorite(42)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/toblerone.webp" alt="toblerone" loading="lazy">
+                    <h3 itemprop="name">Toblerone</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(42, 'Toblerone', 1.99)" aria-label="Ajouter Toblerone au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 43 -->
+                <article class="product-card" data-id="43" data-category="chips" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="43" onclick="toggleFavorite(43)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Laysbarbec.webp" alt="Laysbarbec" loading="lazy">
+                    <h3 itemprop="name">Lays Barbecue</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(43, 'Lays Barbecue', 1.99)" aria-label="Ajouter Lays Barbecue au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 44 -->
+                <article class="product-card" data-id="44" data-category="chocolats" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="44" onclick="toggleFavorite(44)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Kinder-Schoko-bons.webp" alt="Kinder-Schoko-bons" loading="lazy">
+                    <h3 itemprop="name">Kinder Schoko bons </h3>
+                    <p itemprop="price" content="3.99">3.99€</p>
+                    <button onclick="addToCart(44, 'Kinder Schoko bons', 3.99)" aria-label="Ajouter Kinder-Schoko-bons au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 45 -->
+                <article class="product-card" data-id="45" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="45" onclick="toggleFavorite(45)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Moelleuxchonoisbelvit.webp" alt="Moelleuxchonoisbelvit" loading="lazy">
+                    <h3 itemprop="name">Moelleux choco noisette belvita</h3>
+                    <p itemprop="price" content="1.99">1.99€</p>
+                    <button onclick="addToCart(45, 'Moelleux choco noisette belvita', 1.99)" aria-label="Ajouter Moelleux choco noisette belvita au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 46 -->
+                <article class="product-card" data-id="46" data-category="boissons" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="46" onclick="toggleFavorite(46)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/sanpelgrino.webp" alt="sanpellegrino" loading="lazy">
+                    <h3 itemprop="name">Sanpellegrino eau gazeuse</h3>
+                    <p itemprop="price" content="1.40">1.40€</p>
+                    <button onclick="addToCart(46, 'Sanpellegrino eau gazeuse', 1.40)" aria-label="Ajouter Sanpellegrino eau gazeuse au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 47 -->
+                <article class="product-card" data-id="47" data-category="chocolats" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="47" onclick="toggleFavorite(47)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/twix.webp" alt="twix" loading="lazy">
+                    <h3 itemprop="name">Twix</h3>
+                    <p itemprop="price" content="1.50">1.50€</p>
+                    <button onclick="addToCart(47, 'Twix', 1.50)" aria-label="Ajouter Twix au panier">
+                        <div class="add-to-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 48 -->
+                <article class="product-card" data-id="48" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="48" onclick="toggleFavorite(48)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Bjorggale.webp" alt="Bjorggale" loading="lazy">
+                    <h3 itemprop="name">Bjorg galette de riz chocolat bio</h3>
+                    <p itemprop="price" content="1.40">1.40€</p>
+                    <button onclick="addToCart(48, 'Bjorg galette de riz chocolat bio', 1.40)" aria-label="Ajouter Bjorg galette de riz chocolat bio au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+
+                <!-- Product 49 -->
+                <article class="product-card" data-id="49" data-category="biscuits" itemscope itemtype="https://schema.org/Product">
+                    <div class="favorite-icon" data-id="49" onclick="toggleFavorite(48)" aria-label="Ajouter aux favoris">♡</div>
+                    <img src="assets/Biscoff.webp" alt="Bjorggale" loading="lazy">
+                    <h3 itemprop="name">Biscoff</h3>
+                    <p itemprop="price" content="1.80">1.80€</p>
+                    <button onclick="addToCart(49, 'Biscoff', 1.80)" aria-label="Ajouter Biscoff au panier">
+                    <div class="add-to-cart-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                </article>
+                
+
+                
+        </section>
+
+        <!-- Bouton Retour en Haut -->
+        <button id="back-to-top" onclick="scrollToTop()" aria-label="Retour en haut de la page">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <!-- Section Informations -->
+            <div class="footer-section">
+                <h3>Informations</h3>
+                <ul class="footer-links">
+                    <li><a href="cgv.html" aria-label="Conditions Générales de Vente">CGV</a></li>
+                    <li><a href="mentions-legales.html" aria-label="Mentions Légales">Mentions Légales</a></li>
+                    <li><a href="contact.html" aria-label="Contactez-nous">Contact</a></li>
+                </ul>
+            </div>
+    
+            <!-- Section Paiements Acceptés -->
+            <div class="footer-section">
+                <h3>Paiement 100% sécurisé</h3>
+                <div class="payment-icons">
+                    <i class="fab fa-cc-paypal"></i>
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-google-pay"></i>
+                    <i class="fab fa-apple-pay"></i>
+                </div>    
+            </div>
+    
+            <!-- Section Messages Officiels -->
+            <div class="footer-section">
+                <h3>Mentions Importantes</h3>
+                <p class="important-message">
+                <p class="health-tip">
+                    Pour votre santé, mangez au moins <strong>5 fruits et légumes par jour</strong>. Plus d'infos sur <a href="https://www.mangerbouger.fr" target="_blank" rel="noopener noreferrer">mangerbouger.fr</a>.
+                </p>
+            </div>
+    
+            <!-- Section Réseaux Sociaux -->
+            <div class="footer-section">
+                <h3>Suivez-nous</h3>
+                <div class="social-icons">
+                    <a href="https://facebook.com" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                    <a href="https://instagram.com" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+
+                <div class="footer-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28934.40579508444!2d7.259717837500001!3d43.702823!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12cdd01b5f73ec5b%3A0x46f64ae3c4f275f3!2sNice!5e0!3m2!1sen!2sfr!4v1698745600000!5m2!1sen!2sfr" 
+                        width="100%" 
+                        height="100" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Copyright -->
+        <div class="footer-copyright">
+            <p>&copy; 2025 AZUL Snack. Tous droits réservés.</p>
+        </div>
+
+        <div class="footer-banner">
+            <img src="assets/alcohol-banner-legal.webp" alt="Bannière Footer" loading="lazy">
+        </div> 
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js" defer></script> <!-- Assurez-vous que ce chemin est correct -->
+</body>
+</html>

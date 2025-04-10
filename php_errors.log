@@ -1,0 +1,20 @@
+[01-Apr-2025 04:40:03 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 10
+[01-Apr-2025 04:40:03 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 11
+[01-Apr-2025 04:40:03 Europe/Berlin] PHP Warning:  Undefined array key "csrf_token" in C:\xampp\htdocs\azul_snack\submit_login.php on line 19
+[01-Apr-2025 04:40:07 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 10
+[01-Apr-2025 04:40:07 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 11
+[01-Apr-2025 04:40:07 Europe/Berlin] PHP Warning:  Undefined array key "csrf_token" in C:\xampp\htdocs\azul_snack\submit_login.php on line 19
+[01-Apr-2025 04:40:10 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 10
+[01-Apr-2025 04:40:10 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 11
+[01-Apr-2025 04:40:10 Europe/Berlin] PHP Warning:  Undefined array key "csrf_token" in C:\xampp\htdocs\azul_snack\submit_login.php on line 19
+[01-Apr-2025 04:44:26 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 10
+[01-Apr-2025 04:44:26 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 11
+[01-Apr-2025 04:44:26 Europe/Berlin] PHP Warning:  Undefined array key "csrf_token" in C:\xampp\htdocs\azul_snack\submit_login.php on line 19
+[01-Apr-2025 14:00:52 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 10
+[01-Apr-2025 14:00:52 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 11
+[01-Apr-2025 14:00:52 Europe/Berlin] PHP Warning:  Undefined array key "csrf_token" in C:\xampp\htdocs\azul_snack\submit_login.php on line 19
+[01-Apr-2025 14:07:34 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 10
+[01-Apr-2025 14:07:34 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 11
+[01-Apr-2025 14:07:34 Europe/Berlin] PHP Warning:  Undefined array key "csrf_token" in C:\xampp\htdocs\azul_snack\submit_login.php on line 19
+[01-Apr-2025 15:09:16 Europe/Berlin] PHP Warning:  ini_set(): Session ini settings cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 10
+[01-Apr-2025 15:09:16 Europe/Berlin] PHP Warning:  session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active in C:\xampp\htdocs\azul_snack\submit_login.php on line 11

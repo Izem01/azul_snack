@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passer une Commande | AZUL snack</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header role="banner">
+        <nav role="navigation" aria-label="Menu principal">
+            <div class="logo-container">
+                <a href="azul.html" aria-label="Retour à l'accueil">
+                    <img src="assets/azul_logo.png" alt="Logo de AZUL snack" class="logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="azul.html"><i class="fas fa-home"></i> Accueil</a></li>
+                <li><a href="cart.html"><i class="fas fa-shopping-cart"></i> Panier</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section Récapitulatif de la Commande -->
+    <main role="main">
+        <section class="checkout-section" aria-labelledby="checkout-title">
+            <h2 id="checkout-title">Récapitulatif de la commande</h2>
+
+            <!-- Liste des Produits dans le Panier -->
+            <div id="cart-items" class="cart-items">
+                <!-- Les produits seront affichés ici dynamiquement via JavaScript -->
+            </div>
+
+            <!-- Total de la Commande -->
+            <div class="order-summary">
+                <p>Total : <span id="total-price">0.00€</span></p>
+            </div>
+
+            <!-- Formulaire d'Informations de Livraison -->
+            <form id="checkout-form" action="submit_order.php" method="POST">
+                <h3>Informations de Livraison</h3>
+                <div class="form-group">
+                    <label for="address"><i class="fas fa-map-marker-alt"></i> Adresse de livraison</label>
+                    <input type="text" id="address" name="address" placeholder="Entrez votre adresse complète" required>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="floor"><i class="fas fa-building"></i> Étage (facultatif)</label>
+                    <input type="text" id="floor" name="floor" placeholder="Exemple : 3ème étage">
+                </div>
+                <div class="form-group">
+                    <label for="phone"><i class="fas fa-phone"></i> Numéro de téléphone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Entrez votre numéro de téléphone" required>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fas fa-check"></i> Passer la commande</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <div class="footer-top">
+            <div class="footer-links">
+                <h3>Liens Utiles</h3>
+                <ul>
+                    <li><a href="azul.html">Accueil</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Contactez-Nous</h3>
+                <p>Email : contact@azulsnack.com</p>
+                <p>Téléphone : +33645870244</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 AZUL Snack. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script src="cart.js" defer></script>
+</body>
+</html>
